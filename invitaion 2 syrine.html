@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Little Adventure ❤️</title>
+
+    <style>
+        body {
+            background-color: rgb(11, 92, 59);
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .box {
+            margin: 40px auto;
+            min-height: 250px;
+            width: 300px;
+            border: 3px solid #e6dadc;
+            text-align: center;
+            background-color: rgb(235, 223, 225);
+            border-radius: 24px;
+            position: relative;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #head {
+            font-size: 25px;
+        }
+
+        #yes {
+            color: white;
+            background-color: rgb(123, 8, 8);
+            margin: 15px;
+            padding: 6px;
+            border: 3px solid rgb(123, 8, 8);
+            border-radius: 13px;
+            cursor: pointer;
+        }
+
+        #no {
+            color: white;
+            background-color: rgb(1, 23, 12);
+            margin: 15px;
+            padding: 6px;
+            border: 3px solid rgb(3, 36, 19);
+            border-radius: 13px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        .celebration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .party {
+            position: absolute;
+            bottom: -50px;
+            animation: fly 3s linear forwards;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h1 id="head">
+            Would you like to go on a little adventure with me? 🌍✈️
+        </h1>
+
+        <button id="yes" onclick="fn()">Yes ❤️</button>
+        <button id="no" onclick="fx()">No 🙈</button>
+    </div>
+
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        const yesbtn = document.getElementById("yes");
+        const nobtn = document.getElementById("no");
+        const heading = document.getElementById("head");
+        const celebration = document.getElementById("celebration");
+
+        function fn() {
+            heading.innerHTML =
+                "Yaaay! ❤️🥹 Let's travel together! ✈️💕";
+
+            // Return both buttons to their original positions
+            yesbtn.style.position = "";
+            yesbtn.style.left = "";
+            yesbtn.style.top = "";
+
+            nobtn.style.left = "";
+            nobtn.style.top = "";
+
+            // Hearts and stars celebration
+            const emojis = ["❤️", "💕", "💖", "✨", "🎉", "💗", "🌟"];
+
+            for (let i = 0; i < 45; i++) {
+                const item = document.createElement("span");
+
+                item.className = "party";
+                item.textContent =
+                    emojis[Math.floor(Math.random() * emojis.length)];
+
+                item.style.left = Math.random() * 100 + "vw";
+                item.style.fontSize = (20 + Math.random() * 25) + "px";
+                item.style.animationDelay = Math.random() * 2 + "s";
+
+                celebration.appendChild(item);
+
+                setTimeout(() => item.remove(), 5000);
+            }
+        }
+
+        function fx() {
+            const box = document.querySelector(".box");
+
+            const maxX = box.clientWidth - nobtn.offsetWidth;
+            const maxY = box.clientHeight - nobtn.offsetHeight;
+
+            const x = Math.random() * Math.max(0, maxX);
+            const y = Math.random() * Math.max(0, maxY);
+
+            nobtn.style.left = x + "px";
+            nobtn.style.top = y + "px";
+        }
+    </script>
+
+</body>
+</html>
